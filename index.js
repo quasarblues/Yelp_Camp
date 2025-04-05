@@ -63,11 +63,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.deleted = req.flash('deleted');
     next();
-})
+});
 
 // Route Setup (Express Router)
 app.use('/campgrounds', campgroundRoutes);
@@ -75,12 +76,12 @@ app.use('/campgrounds/:id/reviews', reviewRoutes);
 app.use(userRoutes);
 
 app.get('/', (req, res) => {
-    res.render('home')
-})
+    res.render('home');
+});
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));
-})
+});
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
@@ -90,4 +91,4 @@ app.use((err, req, res, next) => {
 
 app.listen(3000, () => {
     console.log('Serving on port 3000');
-})
+});
