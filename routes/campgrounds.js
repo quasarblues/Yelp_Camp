@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const isLoggedIn = require('../middleware');
+const { isLoggedIn } = require('../middleware');
 
 const Campground = require('../models/campground');
 const { campgroundSchema } = require('../schemas');
