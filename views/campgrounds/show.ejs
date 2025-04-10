@@ -12,6 +12,8 @@
                 <li class="list-group-item">$<%= foundCampground.price %></li>
                 <li class="list-group-item">Submitted by: <b><%= foundCampground.author.username %></b></li>
             </ul>
+            <!-- Show Edit/Delete btns to author only -->
+            <% if (currentUser && foundCampground.author.equals(currentUser)) {%>
             <div class="card-body">
                 <a class="card-link btn btn-warning" href="/campgrounds/<%= foundCampground._id %>/edit"
                     class="card-link">Edit</a>
@@ -20,6 +22,7 @@
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
+            <% } %>
         </div>
     </div>
     <div class="col-6">
