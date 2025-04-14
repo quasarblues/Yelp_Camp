@@ -26,6 +26,7 @@
         </div>
     </div>
     <div class="col-6">
+        <% if(currentUser) { %>
         <h2>Leave a Review</h2>
         <form action="/campgrounds/<%= foundCampground._id %>/reviews" class="mb-3 validated-form" method="POST"
             novalidate>
@@ -42,6 +43,7 @@
             </div>
             <button class="btn btn-success">Submit</button>
         </form>
+        <% } %>
         <div>
 
             <% foundCampground.reviews.forEach(review => { %>
@@ -51,6 +53,7 @@
                 </div>
                 <div class="card-body">
                     <p><%= review.body %></p>
+                    <p>- <%= review.author.username %></p>
                     <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=DELETE"
                         method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
