@@ -45,7 +45,6 @@
         </form>
         <% } %>
         <div>
-
             <% foundCampground.reviews.forEach(review => { %>
             <div class="card mb-3">
                 <div class="card-header">
@@ -54,7 +53,7 @@
                 <div class="card-body">
                     <p><%= review.body %></p>
                     <p>- <%= review.author.username %></p>
-                    <% if (currentUser && review.author.equals(currentUser)) {%>
+                    <% if (currentUser && review.author.equals(currentUser)) { %>
                     <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=DELETE"
                         method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
