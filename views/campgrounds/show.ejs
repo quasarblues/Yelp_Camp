@@ -1,4 +1,6 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
 <div class="row mb-3">
     <div class="col-6">
         <div class="card">
@@ -47,12 +49,12 @@
         <div>
             <% foundCampground.reviews.forEach(review => { %>
             <div class="card mb-3">
-                <div class="card-header">
-                    <p class="card-title h5">Rating: <%= review.rating %></p>
-                </div>
                 <div class="card-body">
+                    <p class="starability-result card-title" data-rating="<%= review.rating %>">
+                        Rated: <%= review.rating %> stars
+                    </p>
                     <p><%= review.body %></p>
-                    <p>- <%= review.author.username %></p>
+                    <p><%= review.author.username %></p>
                     <% if (currentUser && review.author.equals(currentUser)) { %>
                     <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=DELETE"
                         method="POST">
