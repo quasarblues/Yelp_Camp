@@ -2,8 +2,8 @@
 <div class="row">
     <h1 class="text-center">New Campground</h1>
     <div class="col-6 offset-3">
-        <form action="/campgrounds" method="POST" novalidate class="validated-form">
-
+        <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <!-- Title input -->
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="campground[title]" required>
@@ -11,7 +11,7 @@
                     Please fill out.
                 </div>
             </div>
-
+            <!-- Location input -->
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" id="location" name="campground[location]" required>
@@ -19,7 +19,7 @@
                     Please fill out.
                 </div>
             </div>
-
+            <!-- Image input -->
             <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
                 <input class="form-control" type="text" id="image" name="campground[image]" required>
@@ -27,7 +27,7 @@
                     Please fill out.
                 </div>
             </div>
-
+            <!-- Price input -->
             <div class="mb-3">
                 <label class="form-label" for="price">Price</label>
                 <div class="input-group">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Description input -->
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" id="description" name="campground[description]" required></textarea>
@@ -47,7 +47,7 @@
                     Please fill out.
                 </div>
             </div>
-
+            <!-- Add button -->
             <div class="mb-3">
                 <button class="btn btn-success">Add Campground</button>
             </div>
