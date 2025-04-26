@@ -1,3 +1,8 @@
+// Set environment variables in dev mode
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 // Core dependencies
 const express = require('express');
 const app = express();
