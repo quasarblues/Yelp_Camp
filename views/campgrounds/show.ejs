@@ -4,7 +4,7 @@
 <div class="row mb-3">
     <div class="col-6">
         <div class="card">
-
+            <!-- Image carousel -->
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <% foundCampground.images.forEach((img, i) => { %>
@@ -13,6 +13,7 @@
                     </div>
                     <%}) %>
                 </div>
+                <% if (foundCampground.images.length > 1) { %>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,7 +25,8 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
+            <% } %>
+            <!-- Card body -->
             <div class="card-body">
                 <h5 class="card-title"><%= foundCampground.title %></h5>
                 <p class="card-text"><%= foundCampground.description %></p>
@@ -47,6 +49,7 @@
             <% } %>
         </div>
     </div>
+    <!-- Review Form -->
     <div class="col-6">
         <% if(currentUser) { %>
         <h2>Leave a Review</h2>
@@ -78,6 +81,7 @@
             <button class="btn btn-success">Submit</button>
         </form>
         <% } %>
+        <!-- Display reviews -->
         <div>
             <% foundCampground.reviews.forEach(review => { %>
             <div class="card mb-3">
@@ -99,7 +103,7 @@
         </div>
     </div>
 </div>
-
+<!-- Link to all campgrounds -->
 <div class="row">
     <footer class="col-6 offset-3">
         <a href="/campgrounds" class="card-link">All Campgrounds</a>
