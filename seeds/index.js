@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Campground = require('../models/campground');
+const Review = require('../models/review');
 const cities = require('./cities');
 const { adjectives, names } = require('./campSeed');
 
@@ -15,16 +16,30 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    await Review.deleteMany({});
+    for (let i = 0; i < 5; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 40) + 10;
         const camp = new Campground({
             author: '67f51ea23c5e06c829fc3db6',
             location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
             title: `${sample(adjectives)} ${sample(names)}`,
-            image: 'https://picsum.photos/400',
             description: 'Spare ribs veniam dolore pariatur nostrud laborum nulla andouille et t-bone ex ullamco. Cupim veniam velit pork loin biltong sirloin. Shank ut tenderloin velit, culpa pastrami ipsum. Occaecat velit drumstick tempor cupim strip steak.',
-            price
+            price,
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/dlvbewmvi/image/upload/v1745974594/YelpCamp/objcfcc1n4fe2wtqzspb.jpg',
+                    filename: 'YelpCamp/objcfcc1n4fe2wtqzspb'
+                },
+                {
+                    url: 'https://res.cloudinary.com/dlvbewmvi/image/upload/v1745974595/YelpCamp/i1axolf277fwcccibso7.jpg',
+                    filename: 'YelpCamp/i1axolf277fwcccibso7'
+                },
+                {
+                    url: 'https://res.cloudinary.com/dlvbewmvi/image/upload/v1745974605/YelpCamp/fzhelsejxq8fgnqukuho.jpg',
+                    filename: 'YelpCamp/fzhelsejxq8fgnqukuho'
+                }
+            ]
         })
         await camp.save();
     }
