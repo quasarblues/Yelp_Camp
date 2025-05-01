@@ -54,7 +54,7 @@ const renderEditForm = async (req, res) => {
 const updateCampground = async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, req.body.campground, { new: true });
-    const imgs = newCampground.images = req.files.map(f => {
+    const imgs = req.files.map(f => {
         return {
             url: f.path,
             filename: f.filename
