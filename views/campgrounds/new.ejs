@@ -25,7 +25,9 @@
                 <div class="invalid-feedback">
                     Upload at least 1 image.
                 </div>
-                <input type="file" name="campground[image]" id="image" multiple required>
+                <input id="formFiles" class="form-control" type="file" name="campground[image]" id="image" multiple
+                    required>
+                <div id="fileName" class="mt-2 text-muted"></div>
             </div>
             <!-- Price input -->
             <div class="mb-3">
@@ -57,3 +59,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    const fileInput = document.querySelector('#formFiles');
+    const fileName = document.querySelector('#fileName');
+
+    fileInput.addEventListener('change', () => {
+        const files = fileInput.files;
+        let fileNames = '';
+
+        // Loop through files object
+        Array.from(files).forEach(file => {
+            fileNames += file.name + ', ';
+        });
+
+        // Remove last comma and space
+        fileNames = fileNames.slice(0, -2);
+        fileName.textContent = files.length > 0 ? `${fileNames}` : '';
+    })
+</script>
