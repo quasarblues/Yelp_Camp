@@ -49,6 +49,16 @@
                     Please fill out.
                 </div>
             </div>
+            <!-- Image Thumbnails -->
+            <div class="mb-3 d-flex flex-wrap gap-2">
+                <% foundCampground.images.forEach((img, i) => { %>
+                <div class="position-relative">
+                    <img class="img-thumbnail" src="<%= img.url %>" alt="">
+                    <input type="checkbox" name="deleteImages[]" value="<%= img.filename %>"
+                        class="form-check-input position-absolute top-0 start-0 m-2 border-dark">
+                </div>
+                <% }) %>
+            </div>
 
             <div class="mb-3">
                 <button class="btn btn-warning">Update</button>
