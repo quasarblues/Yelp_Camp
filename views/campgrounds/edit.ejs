@@ -22,12 +22,6 @@
                     Please fill out.
                 </div>
             </div>
-            <!-- Images Input -->
-            <div class="mb-3">
-                <label class="form-label" for="image">Add Images</label>
-                <input id="formFiles" type="file" class="form-control" id="image" name="campground[image]" multiple>
-                <div id="fileName" class="mt-2 text-muted"></div>
-            </div>
             <!-- Price Input -->
             <div class="mb-3">
                 <label class="form-label" for="price">Price</label>
@@ -49,11 +43,17 @@
                     Please fill out.
                 </div>
             </div>
+            <!-- Images Input -->
+            <div class="mb-3">
+                <label class="form-label" for="image">Add Images</label>
+                <input id="formFiles" type="file" class="form-control" id="image" name="campground[image]" multiple>
+                <div id="fileName" class="mt-2 text-muted"></div>
+            </div>
             <!-- Image Thumbnails -->
             <div class="mb-3 d-flex flex-wrap gap-2">
                 <% foundCampground.images.forEach((img, i) => { %>
                 <div class="position-relative">
-                    <img class="img-thumbnail" src="<%= img.url %>" alt="">
+                    <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="">
                     <input type="checkbox" name="deleteImages[]" value="<%= img.filename %>"
                         class="form-check-input position-absolute top-0 start-0 m-2 border-dark" title="Delete?">
                 </div>
