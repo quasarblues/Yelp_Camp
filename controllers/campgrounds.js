@@ -1,5 +1,8 @@
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinaryConfig');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({});
@@ -11,6 +14,11 @@ const renderNewform = (req, res) => {
 }
 
 const createNewCampground = async (req, res) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: 'Yosemite, CA',
+        limit: 1
+    }).send();
+    console.log(geoData);
     const newCampground = new Campground(req.body.campground);
     newCampground.images = req.files.map(f => {
         return {
