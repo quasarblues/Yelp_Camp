@@ -26,6 +26,10 @@ const seedDB = async () => {
             title: `${sample(adjectives)} ${sample(names)}`,
             description: 'Spare ribs veniam dolore pariatur nostrud laborum nulla andouille et t-bone ex ullamco. Cupim veniam velit pork loin biltong sirloin. Shank ut tenderloin velit, culpa pastrami ipsum. Occaecat velit drumstick tempor cupim strip steak.',
             price,
+            geometry: {
+                type: "Point",
+                coordinates: [-113.1331, 47.0202]
+            },
             images: [
                 {
                     url: 'https://res.cloudinary.com/dlvbewmvi/image/upload/v1747578568/obnoxiuslongname_sracb4.jpg',
