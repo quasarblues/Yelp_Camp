@@ -1,9 +1,9 @@
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinaryConfig');
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const campground = require('../models/campground');
-const mapBoxToken = process.env.MAPBOX_TOKEN;
-const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+// Maptiler variables
+const maptilerClient = require("@maptiler/client");
+maptilerClient.config.apiKey = process.env.MAPTILER_API_KEY;
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({});
@@ -15,12 +15,9 @@ const renderNewform = (req, res) => {
 }
 
 const createNewCampground = async (req, res) => {
-    const geoData = await geocoder.forwardGeocode({
-        query: req.body.campground.location,
-        limit: 1
-    }).send();
+    const geoData = await maptilerClient.geocoding.forward(req.body.campground.location, { limit: 1 });
     const newCampground = new Campground(req.body.campground);
-    newCampground.geometry = geoData.body.features[0].geometry;
+    newCampground.geometry = geoData.features[0].geometry;
     newCampground.images = req.files.map(f => {
         return {
             url: f.path,
@@ -64,7 +61,9 @@ const renderEditForm = async (req, res) => {
 const updateCampground = async (req, res) => {
     const { id } = req.params;
     console.log(req.body);
-    const campground = await Campground.findByIdAndUpdate(id, req.body.campground, { new: true });
+    const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground }, { new: true });
+    const geoData = await maptilerClient.geocoding.forward(req.body.campground.location, { limit: 1 });
+    campground.geometry = geoData.features[0].geometry;
     const imgs = req.files.map(f => {
         return {
             url: f.path,

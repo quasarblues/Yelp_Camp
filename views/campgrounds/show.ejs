@@ -112,8 +112,8 @@
 </div>
 
 <script>
-    const campground = <% - JSON.stringify(foundCampground) %>
-    const mapToken = '<%-process.env.MAPBOX_TOKEN %>'
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campground = <%- JSON.stringify(foundCampground) %>;
 </script>
 
 <script src="/javascripts/showPageMap.js"></script>
