@@ -3,6 +3,7 @@
 
 <div class="row mb-3">
     <div class="col-6">
+        <div id='map' style='width: 400px; height: 300px;'></div>
         <div class="card">
             <!-- Image carousel -->
             <div id="campgroundImages" class="carousel slide">
@@ -95,8 +96,8 @@
                     <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=DELETE"
                         method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
-                        <% } %>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <% }) %>
@@ -109,3 +110,10 @@
         <a href="/campgrounds" class="card-link">All Campgrounds</a>
     </footer>
 </div>
+
+<script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campground = <%- JSON.stringify(foundCampground) %>;
+</script>
+
+<script src="/javascripts/showPageMap.js"></script>

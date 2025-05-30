@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@fluidjs/multer-cloudinary": "^1.0.4",
+    "@maptiler/client": "^1.8.1",
     "cloudinary": "^2.6.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.5.0",

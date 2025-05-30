@@ -17,7 +17,7 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {
     await Campground.deleteMany({});
     await Review.deleteMany({});
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 200; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 40) + 10;
         const camp = new Campground({
@@ -26,6 +26,10 @@ const seedDB = async () => {
             title: `${sample(adjectives)} ${sample(names)}`,
             description: 'Spare ribs veniam dolore pariatur nostrud laborum nulla andouille et t-bone ex ullamco. Cupim veniam velit pork loin biltong sirloin. Shank ut tenderloin velit, culpa pastrami ipsum. Occaecat velit drumstick tempor cupim strip steak.',
             price,
+            geometry: {
+                type: "Point",
+                coordinates: [cities[rand1000].longitude, cities[rand1000].latitude]
+            },
             images: [
                 {
                     url: 'https://res.cloudinary.com/dlvbewmvi/image/upload/v1747578568/obnoxiuslongname_sracb4.jpg',
