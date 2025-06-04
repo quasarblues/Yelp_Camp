@@ -48,10 +48,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
 const sessionConfig = {
+    name: 'sesh',
     secret: 'thisisasecret',
     resave: false,
     saveUninitialized: true,
     cookie: {
+        httpOnly: true,
+        // secure: true,
         // Expire after 1 week
         expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
         // maxAge is 1 week
