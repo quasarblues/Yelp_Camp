@@ -1,15 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
-<div id="cluster-map"></div>
+<div id="cluster-map" class="mb-4"></div>
 
-<h1>These Campgrounds</h1>
-<div class="mb-3">
+<h1>All Campgrounds</h1>
+<div class="my-4">
     <a href="/campgrounds/new">Add Campground</a>
 </div>
 
 <ul>
     <% campgrounds.forEach(campground => { %>
-    <div class="card mb-3">
+    <div class="card mb-4">
         <div class="row">
             <div class="col-md-4">
                 <% if (campground.images.length > 0) { %>
