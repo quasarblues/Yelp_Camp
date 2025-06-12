@@ -3,7 +3,6 @@
 
 <div class="row mb-3">
     <div class="col-6">
-        <div id='map' class="mb-3"></div>
         <div class="card">
             <!-- Image carousel -->
             <div id="campgroundImages" class="carousel slide">
@@ -50,14 +49,18 @@
             <% } %>
         </div>
     </div>
-    <!-- Review Form -->
     <div class="col-6">
+        <!-- Maptiler Start -->
+        <div id='map' class="mb-5"></div>
+        <!-- Maptiler End -->
+
+        <!-- Review Form -->
         <% if(currentUser) { %>
-        <h2>Leave a Review</h2>
+        <h2 class="h5"><b>How would you rate this camp?</b></h2>
         <form action="/campgrounds/<%= foundCampground._id %>/reviews" class="mb-3 validated-form" method="POST"
             novalidate>
-            <div class="mb-1">
-                <fieldset class="starability-basic">
+            <div class="mb-0">
+                <fieldset class="starability-basic p-0">
                     <input type="radio" id="first-rate1" name="review[rating]" value="1" required checked />
                     <label for="first-rate1" title="Terrible">1 star</label>
                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -71,7 +74,7 @@
                 </fieldset>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="body">Review</label>
+                <label class="form-label h5" for="body"><b>How was your experience?</b></label>
                 <textarea class="form-control" name="review[body]" id="body" cols="30" rows="5" required></textarea>
                 <div class="invalid-feedback">
                     Please fill out.
@@ -80,6 +83,11 @@
             <button class="btn btn-success">Submit</button>
         </form>
         <% } %>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-6">
         <!-- Display reviews -->
         <div>
             <% foundCampground.reviews.forEach(review => { %>
@@ -89,7 +97,7 @@
                         Rated: <%= review.rating %> stars
                     </p>
                     <p><%= review.body %></p>
-                    <p><%= review.author.username %></p>
+                    <p>- <%= review.author.username %></p>
                     <% if (currentUser && review.author.equals(currentUser)) { %>
                     <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=DELETE"
                         method="POST">
@@ -102,6 +110,7 @@
         </div>
     </div>
 </div>
+
 <!-- Link to all campgrounds -->
 <div class="row">
     <footer class="col-6 offset-3">
