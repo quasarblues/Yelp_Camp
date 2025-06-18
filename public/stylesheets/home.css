@@ -9,24 +9,17 @@ body {
 }
 
 .cover-container {
-    max-width: 60vw;
+    max-width: 100vw;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.7)
 }
 
 .nav-link {
     padding: 0.25rem 0;
     color: white;
     font-weight: 700;
-    margin-left: 1rem;
-    border-bottom: 0.25rem solid transparent;
-}
-
-.nav-link:hover {
-    color: rgba(255, 255, 255, 0.5);
-    border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.nav-link.active {
-    border-bottom-color: white;
 }
 
 .btn-secondary,
@@ -45,6 +38,27 @@ body {
     color: inherit;
 }
 
-span.navbar-toggler-icon {
-    color: white;
+@media screen and (min-width: 1000px) {
+    .cover-container {
+        max-width: 60vw;
+        padding: 1rem;
+    }
+
+    nav {
+        background-color: transparent;
+    }
+
+    .nav-link:hover {
+        color: rgba(255, 255, 255, 0.5);
+        border-bottom-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-link {
+        margin-left: 1rem;
+        border-bottom: 0.25rem solid transparent;
+    }
+
+    .nav-link.active {
+        border-bottom-color: white;
+    }
 }
