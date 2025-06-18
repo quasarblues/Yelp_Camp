@@ -14,8 +14,8 @@ body {
 
 .nav-link {
     padding: 0.25rem 0;
+    color: white;
     font-weight: 700;
-    color: red;
     margin-left: 1rem;
     border-bottom: 0.25rem solid transparent;
 }
@@ -26,13 +26,25 @@ body {
 }
 
 .nav-link.active {
-    color: white;
     border-bottom-color: white;
-
 }
 
 .btn-secondary,
 .btn-secondary:hover {
     color: #333;
     text-shadow: none;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.navbar-brand:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+span.navbar-toggler-icon {
+    color: white;
 }
