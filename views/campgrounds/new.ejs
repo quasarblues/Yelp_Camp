@@ -1,61 +1,63 @@
-<% layout('layouts/boilerplate') %>
-<div class="row">
-    <h1 class="text-center">New Campground</h1>
-    <div class="col-6 offset-3">
-        <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-            <!-- Title input -->
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]" required>
-                <div class="invalid-feedback">
-                    Please fill out.
-                </div>
-            </div>
-            <!-- Location input -->
-            <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]" required>
-                <div class="invalid-feedback">
-                    Please fill out.
-                </div>
-            </div>
-            <!-- Image input -->
-            <div class="mb-3">
-                <label class="form-label" for="image">Upload Images</label>
-                <div class="invalid-feedback">
-                    Upload at least 1 image.
-                </div>
-                <input id="formFiles" class="form-control" type="file" name="campground[image]" id="image" multiple
-                    required>
-                <div id="fileName" class="mt-2 text-muted"></div>
-            </div>
-            <!-- Price input -->
-            <div class="mb-3">
-                <label class="form-label" for="price">Price</label>
-                <div class="input-group">
-                    <span class="input-group-text">$</span>
-                    <input type="number" class="form-control" id="price" name="campground[price]" step="0.01" min="0"
-                        required>
+<div class="mt-5">
+    <% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <!-- Title input -->
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" required>
                     <div class="invalid-feedback">
                         Please fill out.
                     </div>
                 </div>
-            </div>
-            <!-- Description input -->
-            <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" id="description" name="campground[description]" required></textarea>
-                <div class="invalid-feedback">
-                    Please fill out.
+                <!-- Location input -->
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="invalid-feedback">
+                        Please fill out.
+                    </div>
                 </div>
+                <!-- Image input -->
+                <div class="mb-3">
+                    <label class="form-label" for="image">Upload Images</label>
+                    <div class="invalid-feedback">
+                        Upload at least 1 image.
+                    </div>
+                    <input id="formFiles" class="form-control" type="file" name="campground[image]" id="image" multiple
+                        required>
+                    <div id="fileName" class="mt-2 text-muted"></div>
+                </div>
+                <!-- Price input -->
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="price" name="campground[price]" step="0.01"
+                            min="0" required>
+                        <div class="invalid-feedback">
+                            Please fill out.
+                        </div>
+                    </div>
+                </div>
+                <!-- Description input -->
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+                    <div class="invalid-feedback">
+                        Please fill out.
+                    </div>
+                </div>
+                <!-- Add button -->
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Campground</button>
+                </div>
+            </form>
+            <div>
+                <a href="/campgrounds">All Campgrounds</a>
             </div>
-            <!-- Add button -->
-            <div class="mb-3">
-                <button class="btn btn-success">Add Campground</button>
-            </div>
-        </form>
-        <div>
-            <a href="/campgrounds">All Campgrounds</a>
         </div>
     </div>
 </div>
