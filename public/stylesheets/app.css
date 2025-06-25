@@ -7,3 +7,8 @@
     width: 100%;
     height: 300px;
 }
+
+#login-card-div,
+#register-card-div {
+    min-height: calc(100vh - 112px);
+}
