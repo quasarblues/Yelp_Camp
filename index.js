@@ -14,6 +14,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet');
+const MongoStore = require('connect-mongo');
 
 // Middleware
 const methodOverride = require('method-override');
@@ -29,7 +30,10 @@ const reviewRoutes = require('./routes/reviews');
 const ExpressError = require('./utils/ExpressError');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
+const productionUrl = process.env.DB_URL;
+const localUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+
+mongoose.connect(localUrl)
     .then(() => {
         console.log('Mongo DB connected')
     })
@@ -48,7 +52,19 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
+const store = MongoStore.create({
+    mongoUrl: localUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisisasecret'
+    }
+})
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e);
+})
 const sessionConfig = {
+    store,
     name: 'sesh',
     secret: 'thisisasecret',
     resave: false,
