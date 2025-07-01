@@ -7,14 +7,11 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const app = express();
 const path = require('path');
-const mongoose = require('mongoose');
-const session = require('express-session');
+
+const sessionMiddleware = require('./config/session');
 const flash = require('connect-flash');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const User = require('./models/user');
-const helmet = require('helmet');
-const MongoStore = require('connect-mongo');
+const { passport } = require('./config/passport');
+const helmetMiddleware = require('./config/helmet');
 
 // Middleware
 const methodOverride = require('method-override');
@@ -29,17 +26,6 @@ const reviewRoutes = require('./routes/reviews');
 // Custom Utilities
 const ExpressError = require('./utils/ExpressError');
 
-// Connect to MongoDB
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
-
-mongoose.connect(dbUrl)
-    .then(() => {
-        console.log('Mongo DB connected')
-    })
-    .catch((err) => {
-        console.log(`Error of ${err}`)
-    });
-
 // Core Express Setup
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -51,87 +37,12 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    touchAfter: 24 * 60 * 60,
-    crypto: {
-        secret: 'thisisasecret'
-    }
-})
-
-store.on("error", function (e) {
-    console.log("SESSION STORE ERROR", e);
-})
-const sessionConfig = {
-    store,
-    name: 'sesh',
-    secret: 'thisisasecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        // secure: true,
-        // Expire after 1 week
-        expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
-        // maxAge is 1 week
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-};
-app.use(session(sessionConfig));
+app.use(sessionMiddleware);
 app.use(flash());
-app.use(helmet());
+app.use(helmetMiddleware);
 
-// Configure Helmet content security policy
-const scriptSrcUrls = [
-    "https://stackpath.bootstrapcdn.com/",
-    "https://kit.fontawesome.com/",
-    "https://cdnjs.cloudflare.com/",
-    "https://cdn.jsdelivr.net",
-    "https://cdn.maptiler.com/",
-];
-const styleSrcUrls = [
-    "https://kit-free.fontawesome.com/",
-    "https://stackpath.bootstrapcdn.com/",
-    "https://fonts.googleapis.com/",
-    "https://use.fontawesome.com/",
-    "https://cdn.jsdelivr.net",
-    "https://cdn.maptiler.com/",
-];
-const connectSrcUrls = [
-    "https://api.maptiler.com/",
-];
-const fontSrcUrls = [];
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: [],
-            connectSrc: ["'self'", ...connectSrcUrls],
-            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-            workerSrc: ["'self'", "blob:"],
-            objectSrc: [],
-            imgSrc: [
-                "'self'",
-                "blob:",
-                "data:",
-                "https://res.cloudinary.com/dlvbewmvi/",
-                "https://images.unsplash.com/",
-                "https://api.maptiler.com/",
-            ],
-            fontSrc: ["'self'", ...fontSrcUrls],
-        },
-    })
-);
-
-
-
-// Set up passport
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
