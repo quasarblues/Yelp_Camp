@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-
 const dbUrl = process.env.DB_URL;
-// process.env.DB_LOCAL_URL
+const localDbUrl = process.env.DB_LOCAL_URL;
 
 mongoose.connect(dbUrl)
     .then(() => {
@@ -11,5 +10,4 @@ mongoose.connect(dbUrl)
         console.log(`Error of ${err}`)
     });
 
-console.log(dbUrl);
-module.exports = { mongoose, dbUrl };
+module.exports = { mongoose, dbUrl, localDbUrl };
