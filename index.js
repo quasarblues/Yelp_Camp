@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const app = express();
 const path = require('path');
-
 const sessionMiddleware = require('./config/session');
 const flash = require('connect-flash');
 const { passport } = require('./config/passport');
@@ -49,6 +48,10 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.deleted = req.flash('deleted');
+    res.locals.siteTitle = 'YelpCamp';
+    res.locals.siteDesc = 'Explore our many campgrounds';
+    res.locals.siteImg = 'https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80';
+    res.locals.siteUrl = 'https://yelpcamp-fqsh.onrender.com/';
     next();
 });
 

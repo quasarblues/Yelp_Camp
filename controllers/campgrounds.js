@@ -7,7 +7,14 @@ maptilerClient.config.apiKey = process.env.MAPTILER_API_KEY;
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds, title: 'All Campgrounds' });
+    res.render('campgrounds/index',
+        {
+            campgrounds,
+            siteTitle: 'All Campgrounds',
+            siteDesc: 'Campgrounds submitted by users around the world.',
+            siteImg: campgrounds[0].images[0].url,
+            siteUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`
+        })
 }
 
 const renderNewform = (req, res) => {
