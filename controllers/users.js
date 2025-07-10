@@ -1,7 +1,15 @@
 const User = require('../models/user');
 
 const renderRegisterForm = (req, res) => {
-    res.render('users/register');
+    res.render('users/register',
+        {
+            title: 'Register',
+            siteTitle: 'Join YelpCamp!',
+            siteDesc: 'Sign up to submit and review campgrounds',
+            siteImg: 'https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80',
+            siteUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`
+        }
+    );
 }
 
 const createNewUser = async (req, res) => {

@@ -10,6 +10,7 @@ const index = async (req, res) => {
     res.render('campgrounds/index',
         {
             campgrounds,
+            title: 'All Campgrounds',
             siteTitle: 'All Campgrounds',
             siteDesc: 'Campgrounds submitted by users around the world.',
             siteImg: campgrounds[0].images[0].url,
@@ -18,7 +19,14 @@ const index = async (req, res) => {
 }
 
 const renderNewform = (req, res) => {
-    res.render('campgrounds/new', { title: 'Add a Campground' });
+    res.render('campgrounds/new',
+        {
+            title: 'Add a Campground',
+            siteTitle: 'Add a Campground',
+            siteDesc: 'Submit a new campground.',
+            siteUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`
+
+        });
 }
 
 const createNewCampground = async (req, res) => {
@@ -52,7 +60,15 @@ const show = async (req, res) => {
         req.flash('error', 'Sorry, that campground could not be found.')
         return res.redirect('/campgrounds')
     }
-    res.render('campgrounds/show', { foundCampground, title: foundCampground.title });
+    res.render('campgrounds/show',
+        {
+            foundCampground,
+            title: foundCampground.title,
+            siteTitle: foundCampground.title,
+            siteDesc: foundCampground.description,
+            siteImg: foundCampground.images[0].url,
+            siteUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`
+        });
 }
 
 const renderEditForm = async (req, res) => {
