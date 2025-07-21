@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dbUrl = process.env.DB_URL;
 const localDbUrl = process.env.DB_LOCAL_URL;
 
-mongoose.connect(dbUrl)
+mongoose.connect(localDbUrl)
     .then(() => {
         console.log('Mongo DB connected')
     })
