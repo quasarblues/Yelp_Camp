@@ -59,8 +59,8 @@
             <!-- Review Form -->
             <% if(currentUser) { %>
             <h2 class="h5"><b>How would you rate this camp?</b></h2>
-            <form action="/campgrounds/<%= foundCampground._id %>/reviews" class="mb-3 validated-form" method="POST"
-                novalidate>
+            <form id='reviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews" class="mb-3 validated-form"
+                method="POST" novalidate>
                 <div class="mb-0">
                     <fieldset class="starability-basic p-0">
                         <legend class="visually-hidden">Rating</legend>
@@ -113,6 +113,40 @@
                         </div>
                     </div>
                 </div>
+                <!--edit form -->
+                <form id='editReviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews"
+                    class="mb-3 validated-form d-none" method="POST" novalidate>
+                    <h3 class="h5">Edit Review</h3>
+                    <div class="mb-0">
+                        <fieldset class="starability-basic p-0">
+                            <legend class="visually-hidden">Rating</legend>
+                            <input type="radio" id="edited-rate1" name="review[rating]" value="1" required
+                                <%= review.rating === 1 ? 'checked' : '' %> />
+                            <label for="edited-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="edited-rate2" name="review[rating]" value="2"
+                                <%= review.rating === 2 ? 'checked' : '' %> />
+                            <label for="edited-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="edited-rate3" name="review[rating]" value="3"
+                                <%= review.rating === 3 ? 'checked' : '' %> />
+                            <label for="edited-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="edited-rate4" name="review[rating]" value="4"
+                                <%= review.rating === 4 ? 'checked' : '' %> />
+                            <label for="edited-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="edited-rate5" name="review[rating]" value="5"
+                                <%= review.rating === 5 ? 'checked' : '' %> />
+                            <label for="edited-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label h5 visually-hidden" for="body"><b>Edit Description</b></label>
+                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="5"
+                            required><%= review.body %></textarea>
+                        <div class="invalid-feedback">
+                            Please fill out.
+                        </div>
+                    </div>
+                    <button class="btn btn-success">Update</button>
+                </form>
                 <% }) %>
             </div>
         </div>
