@@ -112,9 +112,9 @@
                             <% } %>
                         </div>
                     </div>
-                </div>
+        </div>
                 <!--edit form -->
-                <form id='editReviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews"
+                <form id='editReviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=PUT"
                     class="mb-3 validated-form d-none" method="POST" novalidate>
                     <h3 class="h5">Edit Review</h3>
                     <div class="mb-0">

@@ -20,4 +20,10 @@ const deleteReview = async (req, res) => {
     res.redirect(`/campgrounds/${id}`);
 }
 
-module.exports = { createReview, deleteReview };
+const updateReview = async (req, res) => {
+    const {id, reviewId} = req.params;
+    await Review.findByIdAndUpdate(reviewId, {...req.body.review}, {new: true});
+    res.redirect(`/campgrounds/${id}`);
+}
+
+module.exports = { createReview, deleteReview, updateReview };

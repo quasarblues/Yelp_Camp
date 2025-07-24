@@ -5,10 +5,9 @@
 // I don't need a route for the review update, since it'll be done on the show page.
 
 const editReviewBtn = document.querySelector('#editReview');
-let prevRating = review.rating;
+const editReviewForm = document.querySelector('#editReviewForm');
 
 editReviewBtn.addEventListener('click', () => {
-    console.log('you clicked');
+    editReviewForm.classList.remove('d-none');
 })
 
-console.log(prevRating);
