@@ -22,7 +22,8 @@ const deleteReview = async (req, res) => {
 
 const updateReview = async (req, res) => {
     const {id, reviewId} = req.params;
-    await Review.findByIdAndUpdate(reviewId, {...req.body.review}, {new: true});
+    const updatedReview = await Review.findByIdAndUpdate(reviewId, {...req.body.review}, {new: true});
+    console.log(updatedReview);
     res.redirect(`/campgrounds/${id}`);
 }
 
