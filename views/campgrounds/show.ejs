@@ -108,14 +108,14 @@
                                 method="POST">
                                 <button class="btn btn-sm btn-danger me-2">Delete</button>
                             </form>
-                            <button id="editReview" class="btn btn-sm btn-warning">Edit</button>
+                            <button class="editReview btn btn-sm btn-warning">Edit</button>
                             <% } %>
                         </div>
                     </div>
         </div>
                 <!--edit form -->
-                <form id='editReviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=PUT"
-                    class="mb-3 validated-form d-none" method="POST" novalidate>
+                <form action="/campgrounds/<%= foundCampground._id %>/reviews/<%= review._id %>?_method=PUT"
+                    class=" editReviewForm mb-3 validated-form d-none" method="POST" novalidate>
                     <h3 class="h5">Edit Review</h3>
                     <div class="mb-0">
                         <fieldset class="starability-basic p-0">
