@@ -12,3 +12,10 @@
 #register-card-div {
     min-height: calc(100vh - 112px);
 }
+
+form.editReviewForm .starability-basic {
+    min-height: 0;
+    /* remove the forced 60px */
+    height: 30px;
+    /* optional, match one row of stars */
+}

@@ -12,15 +12,15 @@ document.querySelectorAll('.editReview').forEach(button => {
 
     // Create the form element
     const form = document.createElement('form');
-    form.classList.add('editReviewForm', 'mb-3', 'validated-form',);
+    form.classList.add('editReviewForm', 'mb-3', 'validated-form', 'card');
     form.method = 'POST';
     form.action = `/campgrounds/${campground._id}/reviews/${reviewId}?_method=PUT`;
 
     // Insert form HTML
     form.innerHTML = `
-  <h3 class="h5">Edit Review</h3>
-  <div class="mb-0">
-    <fieldset class="starability-basic p-0">
+
+  <div class="mb-0 card-body">
+    <fieldset class="starability-basic mb-3">
       <legend class="visually-hidden">Rating</legend>
       <input type="radio" id="edited-rate1-${reviewId}" name="review[rating]" value="1" required ${rating == 1 ? 'checked' : ''} />
       <label for="edited-rate1-${reviewId}" title="Terrible">1 star</label>
@@ -37,23 +37,27 @@ document.querySelectorAll('.editReview').forEach(button => {
       <input type="radio" id="edited-rate5-${reviewId}" name="review[rating]" value="5" ${rating == 5 ? 'checked' : ''} />
       <label for="edited-rate5-${reviewId}" title="Amazing">5 stars</label>
     </fieldset>
-  </div>
 
   <div class="mb-3">
     <textarea class="form-control" name="review[body]" required>${bodyText}</textarea>
   </div>
 
-  <button class="btn btn-success">Update</button>
-  <button type="button" class="btn btn-secondary ms-2 cancelEdit">Cancel</button>
+  <button class="btn btn-sm btn-success">Update</button>
+  <button type="button" class="btn btn-sm btn-secondary ms-2 cancelEdit">Cancel</button>
+
+  </div>
 `;
 
-    cardBody.style.display = 'none';
-    // card.appendChild(form);
+    card.style.display = 'none';
+
     card.insertAdjacentElement('afterend', form);
+    const editTextArea = form.querySelector('textarea');
+    editTextArea.focus();
+    editTextArea.selectionStart = editTextArea.selectionEnd = editTextArea.value.length;
 
     form.querySelector('.cancelEdit').addEventListener('click', () => {
       form.remove();  // simply remove the form from the DOM
-      cardBody.style.display = '';
+      card.style.display = '';
     });
 
   });

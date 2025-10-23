@@ -94,7 +94,7 @@
             <!-- Display reviews -->
             <div>
                 <% foundCampground.reviews.forEach(review => { %>
-                <div class="card mb-3" data-review-id="<%= review._id %>">
+                <div class="card mb-3 show-page" data-review-id="<%= review._id %>">
                     <div class="card-body">
                         <p class="starability-result card-title" data-rating="<%= review.rating %>">
                             Rated: <%= review.rating %> stars
