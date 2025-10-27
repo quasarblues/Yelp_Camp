@@ -56,8 +56,14 @@
             <div id='map' class="mb-5"></div>
             <!-- Maptiler End -->
 
+            <% 
+    // Check if currentUser has already reviewed this campground
+    const userHasReview = currentUser && foundCampground.reviews.some(review => 
+        review.author._id.equals(currentUser._id)
+    );
+          %>
             <!-- Review Form -->
-            <% if(currentUser) { %>
+            <% if(currentUser && !userHasReview) { %>
             <h2 class="h5"><b>How would you rate this camp?</b></h2>
             <form id='reviewForm' action="/campgrounds/<%= foundCampground._id %>/reviews" class="mb-3 validated-form"
                 method="POST" novalidate>
@@ -129,6 +135,10 @@
 <script>
     const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
     const campground = <%- JSON.stringify(foundCampground) %>;
+    const currentUser = <%- JSON.stringify(currentUser || null) %>;
+
+    console.log("currentUser in browser:", currentUser);
+    console.log(campground.reviews[0].author._id);
 </script>
 
 <script crossorigin="anonymous" src="/javascripts/showPageMap.js"></script>
